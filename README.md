@@ -1,24 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OpsEE Catalog UI
+
+A modern, responsive web application for browsing and exploring operations catalog items. Built with Next.js and Tailwind CSS.
+
+## Features
+
+- 📂 Folder-style view of catalog items
+- 🔍 Search functionality to quickly find items
+- 🏷️ Filter by kind, class, domain, and team
+- 📊 Detailed view of catalog items with all metadata
+- 📱 Responsive design for desktop and mobile devices
+- 🔄 API integration with backend catalog service
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18.x or later
+- npm or yarn
+- Backend catalog service (optional - falls back to local data)
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API Integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application is configured to fetch data from a backend API:
+
+- Default URL: `http://localhost:8080/api/catalog`
+- Can be configured via `CATALOG_URL` environment variable
+- Fallback: Local `catalog.json` file if the API is unavailable
+
+## Docker
+
+### Building the Docker Image
+
+```bash
+docker build -t opsee-catalog-ui .
+```
+
+### Running the Docker Container
+
+```bash
+docker run -p 3000:3000 -e CATALOG_URL=http://your-api-host/api/catalog opsee-catalog-ui
+```
+
+You can also use the provided script:
+
+```bash
+./docker-build.sh
+```
+
+### Environment Variables
+
+- `CATALOG_URL`: URL of the catalog API (default: `http://localhost:8080/api/catalog`)
+
+## Project Structure
+
+- `/public` - Static assets including the catalog.json file (used as fallback)
+- `/src/app` - Next.js app router components
+- `/src/app/api` - Next.js API routes for backend integration
+- `/src/components` - React components
+- `/src/types` - TypeScript type definitions
+- `/src/utils` - Utility functions
 
 ## Learn More
 
